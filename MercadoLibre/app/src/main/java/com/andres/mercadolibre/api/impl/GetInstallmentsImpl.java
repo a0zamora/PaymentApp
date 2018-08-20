@@ -6,11 +6,11 @@ import com.andres.mercadolibre.api.core.model.request.InstallmentsRequest;
 import com.andres.mercadolibre.api.core.uc.GetInstallmentsUseCase;
 import io.reactivex.observers.DisposableObserver;
 
-public class GetInstallmentsManager {
+public class GetInstallmentsImpl {
 
   GetInstallmentsUseCase useCase;
 
-  public GetInstallmentsManager(){
+  public GetInstallmentsImpl(){
     useCase = new GetInstallmentsUseCase();
   }
   public void getInstallments(String amount, String issuerId, String paymentMethodId) {

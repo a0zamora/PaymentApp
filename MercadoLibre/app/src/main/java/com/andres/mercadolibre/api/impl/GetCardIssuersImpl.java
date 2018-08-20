@@ -7,11 +7,11 @@ import com.andres.mercadolibre.api.core.uc.GetCardIssuersUseCase;
 import io.reactivex.observers.DisposableObserver;
 import java.util.List;
 
-public class GetCardIssuersManager {
+public class GetCardIssuersImpl {
 
   GetCardIssuersUseCase useCase;
 
-  public GetCardIssuersManager() {
+  public GetCardIssuersImpl() {
     useCase = new GetCardIssuersUseCase();
   }
 

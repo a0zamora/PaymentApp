@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface PaymentMethodInterface extends InterfaceImpl.View {
 
-  void engineData(List<PaymentMethodsModel> paymentMethodsModels);
+  void drawData(List<PaymentMethodsModel> paymentMethodsModels);
 
 }

@@ -29,7 +29,7 @@ public class GetPaymentMethodsImpl extends BaseInterfaceImpl<PaymentMethodInterf
     }
 
     @Override public void onNext(List<PaymentMethodsModel> methods) {
-      getView().engineData(methods);
+      getView().drawData(methods);
     }
 
     @Override public void onError(Throwable e) {

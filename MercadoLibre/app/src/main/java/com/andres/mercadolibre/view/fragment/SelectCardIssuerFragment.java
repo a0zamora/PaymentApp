@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import com.andres.mercadolibre.R;
 import com.andres.mercadolibre.api.core.model.PaymentMethodsModel;
 import com.andres.mercadolibre.api.impl.GetPaymentMethodsImpl;
@@ -16,11 +17,13 @@ import java.util.List;
 public class SelectCardIssuerFragment extends Fragment implements PaymentMethodInterface {
 
   GetPaymentMethodsImpl impl;
+  Button retry;
 
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.card_issuers_fragment, container, false);
+    retry = view.findViewById(R.id.retry);
     return view;
   }
 
@@ -29,9 +32,15 @@ public class SelectCardIssuerFragment extends Fragment implements PaymentMethodI
     impl = new GetPaymentMethodsImpl();
     impl.attachView(this);
     impl.getPaymentMethods();
+
+    retry.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        impl.getPaymentMethods();
+      }
+    });
   }
 
-  @Override public void engineData(List<PaymentMethodsModel> paymentMethodsModels) {
+  @Override public void drawData(List<PaymentMethodsModel> paymentMethodsModels) {
     if (paymentMethodsModels!=null) {
 
     }

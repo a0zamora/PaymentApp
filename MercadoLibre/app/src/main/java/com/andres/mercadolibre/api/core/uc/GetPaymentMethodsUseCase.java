@@ -2,6 +2,7 @@ package com.andres.mercadolibre.api.core.uc;
 
 import com.andres.mercadolibre.BuildConfig;
 import com.andres.mercadolibre.api.NetworkInterface;
+import com.andres.mercadolibre.api.core.ApiConnecter;
 import com.andres.mercadolibre.api.core.model.PaymentMethodsModel;
 import com.andres.mercadolibre.api.core.uc.base.UseCase;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -16,15 +17,7 @@ public class GetPaymentMethodsUseCase extends UseCase<List<PaymentMethodsModel>,
   Retrofit retrofit;
 
   public GetPaymentMethodsUseCase(){
-    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-    OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-    retrofit = new Retrofit.Builder()
-        .baseUrl(BuildConfig.CORE_API)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .client(client)
-        .build();
+    retrofit = ApiConnecter.getRetrofit();
   }
 
   @Override protected Observable<List<PaymentMethodsModel>> buildUseCaseObservable(String params) {

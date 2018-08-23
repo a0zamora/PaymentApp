@@ -15,6 +15,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       android:digits="1234567890"
+      android:hint="Introduzca Monto para continuar"
       android:inputType="number"
       />
   <Button

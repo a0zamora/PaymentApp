@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
 
   @Override protected void onStop() {
     super.onStop();
-    sendAnswer();
   }
 
   private void sendAnswer() {

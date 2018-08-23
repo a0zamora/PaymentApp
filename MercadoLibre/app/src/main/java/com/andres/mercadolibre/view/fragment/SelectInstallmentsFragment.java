@@ -90,7 +90,7 @@ public class SelectInstallmentsFragment extends Fragment implements SelectINstal
 
   @Override public void onInstallmentClicked(String id, String name) {
     if (listener != null) {
-      listener.goHome();
+      listener.goHome(name);
     }
   }
 }

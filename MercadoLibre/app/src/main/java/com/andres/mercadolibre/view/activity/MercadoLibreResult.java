@@ -5,6 +5,7 @@ public class MercadoLibreResult {
   public Bank bank = new Bank();
 
   public String amount;
+  public String installment;
 
   public class Card {
     public String id;

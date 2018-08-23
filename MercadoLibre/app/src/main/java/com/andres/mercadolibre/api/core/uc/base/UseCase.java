@@ -1,6 +1,5 @@
 package com.andres.mercadolibre.api.core.uc.base;
 
-import com.andres.mercadolibre.api.core.uc.base.BaseUseCase;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;

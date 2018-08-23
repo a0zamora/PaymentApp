@@ -1,5 +1,7 @@
 package com.andres.mercadolibre.view.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,11 +12,15 @@ import com.andres.mercadolibre.view.fragment.AmountFragment;
 import com.andres.mercadolibre.view.fragment.SelectBankFragment;
 import com.andres.mercadolibre.view.fragment.SelectCardIssuerFragment;
 import com.andres.mercadolibre.view.fragment.SelectInstallmentsFragment;
-import com.andres.mercadolibre.view.fragment.contract.SelectINstallmentInterface;
 
 public class MainActivity extends AppCompatActivity implements MainActivityInterface {
 
+
+  public static final String AMOUNT = "AMOUNT";
   public static final String PAYMENT_METHOD = "PAYMENT_METHOD";
+  public static final String BANK = "BANK";
+  public static final String INSTALLMENT = "INSTALLMENT";
+
   MachineStates state = MachineStates.SELECT_AMOUNT;
   MercadoLibreResult result;
 
@@ -30,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     result = new MercadoLibreResult();
-    goToPaymentMethod();
+    goToAmountFragment();
   }
 
   void replace(Fragment fragment) {
@@ -46,21 +52,25 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
   }
 
   private void sendAnswer() {
-    /*Intent intent = new Intent();
-    intent.getExtras().putString(PAYMENT_METHOD, cardIssuer);
-    setResult(Activity.RESULT_OK, intent);*/
-    this.finish();
+    Intent intent = new Intent();
+    intent.getExtras().putString(AMOUNT, result.amount);
+    intent.getExtras().putString(PAYMENT_METHOD, result.paymentMethod.name);
+    intent.getExtras().putString(BANK, result.bank.name);
+    intent.getExtras().putString(INSTALLMENT, result.installment);
+    setResult(Activity.RESULT_OK, intent);
+    finish();
   }
 
   @Override public void goToAmountFragment() {
     state = MachineStates.SELECT_AMOUNT;
     AmountFragment fragment = new AmountFragment();
+    fragment.setListener(this);
     replace(fragment);
   }
 
-  @Override public void goToPaymentMethod() {
+  @Override public void goToPaymentMethod(String amount) {
     state = MachineStates.SELECT_CARD;
-    result.amount = "100000";
+    result.amount = amount;
     SelectCardIssuerFragment cardIssuerFragment = new SelectCardIssuerFragment();
     cardIssuerFragment.setListener(this);
     replace(cardIssuerFragment);
@@ -86,7 +96,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
     replace(fragment);
   }
 
-  @Override public void goHome() {
+  @Override public void goHome(String installment) {
+    result.installment = installment;
     sendAnswer();
   }
 
@@ -100,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
       return;
     }
     if (state.equals(MachineStates.SELECT_BANK)) {
-      goToPaymentMethod();
+      goToPaymentMethod(result.amount);
       return;
     }
     if (state.equals(MachineStates.SELECT_INSTALLMENTS)) {

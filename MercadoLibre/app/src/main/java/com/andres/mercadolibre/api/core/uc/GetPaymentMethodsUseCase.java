@@ -2,7 +2,6 @@ package com.andres.mercadolibre.api.core.uc;
 
 import com.andres.mercadolibre.BuildConfig;
 import com.andres.mercadolibre.api.NetworkInterface;
-import com.andres.mercadolibre.api.core.ApiConnecter;
 import com.andres.mercadolibre.api.core.model.PaymentMethodsModel;
 import com.andres.mercadolibre.api.core.uc.base.UseCase;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

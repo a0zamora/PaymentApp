@@ -18,7 +18,7 @@ public class InstallmentAdapter extends RecyclerView.Adapter<InstallmentAdapter.
   @NonNull @Override
   public InstallmentAdapter.CardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-    return new InstallmentAdapter.CardHolder(inflater.inflate(R.layout.card_item, null, false));
+    return new InstallmentAdapter.CardHolder(inflater.inflate(R.layout.installment_item, null, false));
   }
 
   @Override

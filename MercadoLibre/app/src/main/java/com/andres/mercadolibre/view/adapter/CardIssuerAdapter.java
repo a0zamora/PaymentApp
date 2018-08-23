@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.andres.mercadolibre.R;
 import com.andres.mercadolibre.api.core.model.PaymentMethodsModel;
+import com.andres.mercadolibre.view.util.ImageLoader;
 import java.util.List;
 
 public class CardIssuerAdapter extends RecyclerView.Adapter<CardIssuerAdapter.CardHolder>{
@@ -23,6 +25,7 @@ public class CardIssuerAdapter extends RecyclerView.Adapter<CardIssuerAdapter.Ca
 
   @Override public void onBindViewHolder(@NonNull CardIssuerAdapter.CardHolder holder, final int position) {
     holder.name.setText(data.get(position).name);
+    ImageLoader.loadImage(data.get(position).thumbnail, holder.imageView);
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         if(listener!=null) {
@@ -44,10 +47,11 @@ public class CardIssuerAdapter extends RecyclerView.Adapter<CardIssuerAdapter.Ca
 
   public class CardHolder extends RecyclerView.ViewHolder {
     public TextView name;
-
+    public ImageView imageView;
     public CardHolder(View itemView) {
       super(itemView);
       name = itemView.findViewById(R.id.name);
+      imageView = itemView.findViewById(R.id.imageView);
     }
   }
 

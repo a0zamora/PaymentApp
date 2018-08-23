@@ -42,19 +42,15 @@ public class WelcomeActivity extends AppCompatActivity {
         "\nBanco: " + data.getExtras().getString(MainActivity.BANK) +
         "\nNúmero de Cuotas: " + data.getExtras().getString(MainActivity.INSTALLMENT);
 
-    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-    builder1.setMessage(result);
-    builder1.setCancelable(true);
-    builder1.setNeutralButton(
-        "Aceptar",
+     new AlertDialog.Builder(this).
+         setMessage(result).
+         setCancelable(true).
+         setNeutralButton("Aceptar",
         new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int id) {
             dialog.cancel();
           }
-        });
-    AlertDialog alert11 = builder1.create();
-    alert11.show();
-
+        }).create().show();
 
   }
 }

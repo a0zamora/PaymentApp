@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.andres.mercadolibre.R;
 import com.andres.mercadolibre.api.core.model.PaymentMethodsModel;
 import com.andres.mercadolibre.api.impl.GetPaymentMethodsImpl;
+import com.andres.mercadolibre.view.activity.MainActivityInterface;
+import com.andres.mercadolibre.view.activity.MercadoLibreResult;
 import com.andres.mercadolibre.view.adapter.CardIssuerAdapter;
 import com.andres.mercadolibre.view.fragment.contract.PaymentMethodInterface;
 import java.util.List;
@@ -26,7 +28,8 @@ public class SelectCardIssuerFragment extends Fragment implements PaymentMethodI
   ProgressBar progressBar;
   RecyclerView list;
 
-  MercadoLibreResult result;
+  MainActivityInterface listener;
+
 
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -37,7 +40,6 @@ public class SelectCardIssuerFragment extends Fragment implements PaymentMethodI
     list = view.findViewById(R.id.list);
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
     list.setLayoutManager(linearLayoutManager);
-    result = new MercadoLibreResult();
     retry.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         impl.getPaymentMethods();
@@ -61,6 +63,10 @@ public class SelectCardIssuerFragment extends Fragment implements PaymentMethodI
     }
   }
 
+  public void setListener(MainActivityInterface listener) {
+    this.listener = listener;
+  }
+
   @Override public void showLoading() {
     progressBar.setVisibility(View.VISIBLE);
     retry.setVisibility(View.GONE);
@@ -76,12 +82,8 @@ public class SelectCardIssuerFragment extends Fragment implements PaymentMethodI
   }
 
   @Override public void setName(String id, String name) {
-    result.paymentMethodName = name;
-    Toast.makeText(getActivity(),id + " - " +name,Toast.LENGTH_SHORT).show();
+    if(listener != null) {
+      listener.goToSelectBank(id, name);
+    }
   }
-
-  public class MercadoLibreResult {
-    public String paymentMethodName;
-  }
-
 }

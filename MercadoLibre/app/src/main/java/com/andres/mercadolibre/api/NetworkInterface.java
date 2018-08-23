@@ -18,7 +18,7 @@ public interface NetworkInterface {
       @Query("payment_method_id") String paymentMethodId);
 
   @GET("payment_methods/installments")
-  Observable<InstallmentsModel> getInstallments(@Query("public_key") String publicKey,
+  Observable<List<InstallmentsModel>> getInstallments(@Query("public_key") String publicKey,
       @Query("amount") String amount,
       @Query("payment_method_id") String paymentMethodId,
       @Query("issuer.id") String issuerId);

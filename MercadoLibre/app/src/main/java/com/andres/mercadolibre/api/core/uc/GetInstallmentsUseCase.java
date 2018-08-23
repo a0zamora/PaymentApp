@@ -6,9 +6,10 @@ import com.andres.mercadolibre.api.core.model.InstallmentsModel;
 import com.andres.mercadolibre.api.core.model.request.InstallmentsRequest;
 import com.andres.mercadolibre.api.core.uc.base.UseCase;
 import io.reactivex.Observable;
+import java.util.List;
 import retrofit2.Retrofit;
 
-public class GetInstallmentsUseCase extends UseCase<InstallmentsModel, InstallmentsRequest> {
+public class GetInstallmentsUseCase extends UseCase<List<InstallmentsModel>, InstallmentsRequest> {
   Retrofit retrofit;
 
   public GetInstallmentsUseCase() {
@@ -16,7 +17,7 @@ public class GetInstallmentsUseCase extends UseCase<InstallmentsModel, Installme
   }
 
   @Override
-  protected Observable<InstallmentsModel> buildUseCaseObservable(InstallmentsRequest params) {
+  protected Observable<List<InstallmentsModel>> buildUseCaseObservable(InstallmentsRequest params) {
 
     return retrofit.create(NetworkInterface.class)
         .getInstallments(params.publicKey, params.amount, params.paymentMethodId, params.issuerId);

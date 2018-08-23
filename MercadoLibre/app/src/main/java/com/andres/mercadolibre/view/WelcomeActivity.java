@@ -1,9 +1,11 @@
 package com.andres.mercadolibre.view;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -28,15 +30,31 @@ public class WelcomeActivity extends AppCompatActivity {
   }
 
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == MAIN_CODE && requestCode == Activity.RESULT_OK) {
-
-      String result = "AMOUNT: " + data.getExtras().getString(MainActivity.AMOUNT) +
-          "\nPAYMENT METHOD " + data.getExtras().getString(MainActivity.PAYMENT_METHOD) +
-          "\nBANK " + data.getExtras().getString(MainActivity.BANK) +
-          "\nINSTALLMENT" + data.getExtras().getString(MainActivity.INSTALLMENT);
-
-      Toast.makeText(WelcomeActivity.this, result, Toast.LENGTH_LONG).show();
+    if (requestCode == MAIN_CODE && resultCode == Activity.RESULT_OK) {
+      showResult(data);
     }
     super.onActivityResult(requestCode, resultCode, data);
+  }
+
+  private void showResult(Intent data) {
+    String result = "Monto: " + data.getExtras().getString(MainActivity.AMOUNT) +
+        "\nMétodo de Pago: " + data.getExtras().getString(MainActivity.PAYMENT_METHOD) +
+        "\nBanco: " + data.getExtras().getString(MainActivity.BANK) +
+        "\nNúmero de Cuotas: " + data.getExtras().getString(MainActivity.INSTALLMENT);
+
+    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+    builder1.setMessage(result);
+    builder1.setCancelable(true);
+    builder1.setNeutralButton(
+        "Aceptar",
+        new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int id) {
+            dialog.cancel();
+          }
+        });
+    AlertDialog alert11 = builder1.create();
+    alert11.show();
+
+
   }
 }

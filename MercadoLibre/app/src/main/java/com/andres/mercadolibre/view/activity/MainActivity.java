@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityInter
 
   private void sendAnswer() {
     Intent intent = new Intent();
-    intent.getExtras().putString(AMOUNT, result.amount);
-    intent.getExtras().putString(PAYMENT_METHOD, result.paymentMethod.name);
-    intent.getExtras().putString(BANK, result.bank.name);
-    intent.getExtras().putString(INSTALLMENT, result.installment);
+    intent.putExtra(AMOUNT, result.amount);
+    intent.putExtra(PAYMENT_METHOD, result.paymentMethod.name);
+    intent.putExtra(BANK, result.bank.name);
+    intent.putExtra(INSTALLMENT, result.installment);
     setResult(Activity.RESULT_OK, intent);
     finish();
   }

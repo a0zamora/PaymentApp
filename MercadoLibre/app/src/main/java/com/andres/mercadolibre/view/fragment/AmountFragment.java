@@ -25,7 +25,7 @@ public class AmountFragment extends Fragment {
   }
 
   @Nullable @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container,
       @Nullable Bundle savedInstanceState) {
 
     View view = inflater.inflate(R.layout.select_amount_fragment, container, false);
@@ -49,9 +49,10 @@ public class AmountFragment extends Fragment {
       }
 
       @Override public void afterTextChanged(Editable s) {
-
         if (editText.getText().toString().isEmpty()) {
-
+          continueButton.setEnabled(false);
+        } else {
+          continueButton.setEnabled(true);
         }
       }
     });
